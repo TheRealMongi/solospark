@@ -10,17 +10,17 @@ This implementation plan provides a structured, realistic roadmap for building S
 
 **Goal**: Set up the development environment, CI/CD, and deploy basic scaffolding.
 
-* **Tasks**:
+- **Tasks**:
 
-  * Set up repository structure (frontend/backend split or monorepo).
-  * Install ESLint, Prettier, Husky, and commit hooks.
-  * Configure [Tailwind CSS](https://tailwindcss.com/), [shadcn/ui](https://ui.shadcn.com/), and React.
-  * Create [Vercel project](https://vercel.com/dashboard), [Supabase project](https://app.supabase.com/), and [Upstash project](https://upstash.com/).
-  * Integrate [Clerk](https://dashboard.clerk.dev/) and test login/logout flow.
-  * Set up [GitHub Actions](https://github.com/features/actions) for formatting, linting, and testing on push.
-  * Add placeholder `README.md`, `CONTRIBUTING.md`, and `.env.example`.
+  - Set up repository structure (frontend/backend split or monorepo).
+  - Install ESLint, Prettier, Husky, and commit hooks.
+  - Configure [Tailwind CSS](https://tailwindcss.com/), [shadcn/ui](https://ui.shadcn.com/), and React.
+  - Create [Vercel project](https://vercel.com/dashboard), [Supabase project](https://app.supabase.com/), and [Upstash project](https://upstash.com/).
+  - Integrate [Clerk](https://dashboard.clerk.dev/) and test login/logout flow.
+  - Set up [GitHub Actions](https://github.com/features/actions) for formatting, linting, and testing on push.
+  - Add placeholder `README.md`, `CONTRIBUTING.md`, and `.env.example`.
 
-* **Deliverable**: Development environment is ready, Vercel deploys work, CI is functional, and login/logout flows are operational.
+- **Deliverable**: Development environment is ready, Vercel deploys work, CI is functional, and login/logout flows are operational.
 
 ---
 
@@ -28,17 +28,17 @@ This implementation plan provides a structured, realistic roadmap for building S
 
 **Goal**: Build and deploy the basic skeleton of the product without features.
 
-* **Tasks**:
+- **Tasks**:
 
-  * Set up API routing using [Fastify](https://fastify.dev/) or Next.js API routes.
-  * Implement [tRPC](https://trpc.io/) for backend and frontend communication.
-  * Connect [Prisma ORM](https://www.prisma.io/) to Supabase.
-  * Set up [BullMQ](https://bullmq.io/) job queue with Redis integration.
-  * Create a dummy "echo post" job that logs after a 10-second delay.
-  * Build authentication middleware and protect routes.
-  * Add a logging system using [Pino](https://getpino.io/).
+  - Set up API routing using [Fastify](https://fastify.dev/) or Next.js API routes.
+  - Implement [tRPC](https://trpc.io/) for backend and frontend communication.
+  - Connect [Prisma ORM](https://www.prisma.io/) to Supabase.
+  - Set up [BullMQ](https://bullmq.io/) job queue with Redis integration.
+  - Create a dummy "echo post" job that logs after a 10-second delay.
+  - Build authentication middleware and protect routes.
+  - Add a logging system using [Pino](https://getpino.io/).
 
-* **Deliverable**: End-to-end protected API route and background job queues are functional.
+- **Deliverable**: End-to-end protected API route and background job queues are functional.
 
 ---
 
@@ -46,16 +46,16 @@ This implementation plan provides a structured, realistic roadmap for building S
 
 **Goal**: Enable users to create posts, tweak them per platform, and schedule them.
 
-* **Tasks**:
+- **Tasks**:
 
-  * Build the "Create Post" form using [React Hook Form](https://react-hook-form.com/) and [Zod](https://zod.dev/).
-  * Implement AI caption suggestions via an [OpenAI](https://platform.openai.com/) wrapper.
-  * Develop the "Post Once, Tweak Everywhere" UI with platform toggles.
-  * Create a drag-and-drop calendar UI using [FullCalendar](https://fullcalendar.io/) or similar.
-  * Schedule jobs to execute post publishing (initially with mock API calls).
-  * Store post metadata with scheduling information in the database.
+  - Build the "Create Post" form using [React Hook Form](https://react-hook-form.com/) and [Zod](https://zod.dev/).
+  - Implement AI caption suggestions via an [OpenAI](https://platform.openai.com/) wrapper.
+  - Develop the "Post Once, Tweak Everywhere" UI with platform toggles.
+  - Create a drag-and-drop calendar UI using [FullCalendar](https://fullcalendar.io/) or similar.
+  - Schedule jobs to execute post publishing (initially with mock API calls).
+  - Store post metadata with scheduling information in the database.
 
-* **Deliverable**: Core "Create + Schedule Post" flow works for logged-in users.
+- **Deliverable**: Core "Create + Schedule Post" flow works for logged-in users.
 
 ---
 
@@ -63,13 +63,13 @@ This implementation plan provides a structured, realistic roadmap for building S
 
 **Goal**: Provide simple performance tracking for posts.
 
-* **Tasks**:
+- **Tasks**:
 
-  * Build an analytics dashboard with mocked data (clicks, views, likes).
-  * Add "Quick Wins" insights logic (e.g., top post, best posting time).
-  * Integrate AI-driven suggestions (e.g., "Your X posts get 2x more likes").
+  - Build an analytics dashboard with mocked data (clicks, views, likes).
+  - Add "Quick Wins" insights logic (e.g., top post, best posting time).
+  - Integrate AI-driven suggestions (e.g., "Your X posts get 2x more likes").
 
-* **Deliverable**: Dashboard with basic, actionable feedback on post performance.
+- **Deliverable**: Dashboard with basic, actionable feedback on post performance.
 
 ---
 
@@ -77,14 +77,14 @@ This implementation plan provides a structured, realistic roadmap for building S
 
 **Goal**: Add queue retry logic, error handling, and message response stubs.
 
-* **Tasks**:
+- **Tasks**:
 
-  * Implement retries and backoff rules for BullMQ jobs.
-  * Add error feedback in the UI (e.g., "Post failed to publish").
-  * Include status indicators in the calendar (scheduled, failed, published).
-  * Create stubs for engagement features (e.g., comments/messages view, mocked).
+  - Implement retries and backoff rules for BullMQ jobs.
+  - Add error feedback in the UI (e.g., "Post failed to publish").
+  - Include status indicators in the calendar (scheduled, failed, published).
+  - Create stubs for engagement features (e.g., comments/messages view, mocked).
 
-* **Deliverable**: Users receive meaningful feedback on the post lifecycle.
+- **Deliverable**: Users receive meaningful feedback on the post lifecycle.
 
 ---
 
@@ -92,13 +92,13 @@ This implementation plan provides a structured, realistic roadmap for building S
 
 **Goal**: Connect to real Instagram, LinkedIn, and X accounts via APIs (or mocks if gated).
 
-* **Tasks**:
+- **Tasks**:
 
-  * Integrate platform APIs (even if only in dev mode or with post echoes).
-  * Securely store and retrieve access tokens (e.g., using Supabase encrypted columns).
-  * Build test-post-to-platform job handlers.
+  - Integrate platform APIs (even if only in dev mode or with post echoes).
+  - Securely store and retrieve access tokens (e.g., using Supabase encrypted columns).
+  - Build test-post-to-platform job handlers.
 
-* **Deliverable**: Posts are published to at least one real platform in limited dev mode.
+- **Deliverable**: Posts are published to at least one real platform in limited dev mode.
 
 ---
 
@@ -106,14 +106,14 @@ This implementation plan provides a structured, realistic roadmap for building S
 
 **Goal**: Implement the Solo Pro billing tier using Stripe.
 
-* **Tasks**:
+- **Tasks**:
 
-  * Integrate [Stripe](https://stripe.com/) for a flat \$12/month subscription.
-  * Limit the free plan to 3 channels and 20 posts.
-  * Add an "Upgrade" CTA and modal.
-  * Set up Stripe webhooks for plan changes.
+  - Integrate [Stripe](https://stripe.com/) for a flat \$12/month subscription.
+  - Limit the free plan to 3 channels and 20 posts.
+  - Add an "Upgrade" CTA and modal.
+  - Set up Stripe webhooks for plan changes.
 
-* **Deliverable**: Users can pay to unlock full features.
+- **Deliverable**: Users can pay to unlock full features.
 
 ---
 
@@ -121,15 +121,15 @@ This implementation plan provides a structured, realistic roadmap for building S
 
 **Goal**: Lock down all APIs, logs, and data.
 
-* **Tasks**:
+- **Tasks**:
 
-  * Enforce user ownership on all queries.
-  * Add rate limiting middleware.
-  * Sanitize AI inputs.
-  * Harden Clerk middleware for all routes.
-  * Audit secrets and environment configurations.
+  - Enforce user ownership on all queries.
+  - Add rate limiting middleware.
+  - Sanitize AI inputs.
+  - Harden Clerk middleware for all routes.
+  - Audit secrets and environment configurations.
 
-* **Deliverable**: MVP passes a basic security checklist.
+- **Deliverable**: MVP passes a basic security checklist.
 
 ---
 
@@ -137,14 +137,14 @@ This implementation plan provides a structured, realistic roadmap for building S
 
 **Goal**: Finalize onboarding, tracking, and cleanup for launch readiness.
 
-* **Tasks**:
+- **Tasks**:
 
-  * Finalize the onboarding flow.
-  * Integrate bug tracking with [Sentry](https://sentry.io/) and user tracking with [PostHog](https://posthog.com/).
-  * Clean up any technical debt or UI inconsistencies.
-  * Run test users through the full flow: onboarding → create → schedule → analyze → pay → cancel.
+  - Finalize the onboarding flow.
+  - Integrate bug tracking with [Sentry](https://sentry.io/) and user tracking with [PostHog](https://posthog.com/).
+  - Clean up any technical debt or UI inconsistencies.
+  - Run test users through the full flow: onboarding → create → schedule → analyze → pay → cancel.
 
-* **Deliverable**: Polished product with onboarding and tracking ready for launch.
+- **Deliverable**: Polished product with onboarding and tracking ready for launch.
 
 ---
 
@@ -152,11 +152,11 @@ This implementation plan provides a structured, realistic roadmap for building S
 
 **Goal**: Prepare and test the launch candidate.
 
-* **Tasks**:
+- **Tasks**:
 
-  * Polish the landing page and copy.
-  * Add email support using [Resend](https://resend.com/).
-  * Implement feature flags if needed.
-  * Conduct a smoke test: create → schedule → publish → analyze → pay.
-  * Deploy to a staging environment for final validation.
-  * Prepare launch communications (e.g., blog post, email announcement).
+  - Polish the landing page and copy.
+  - Add email support using [Resend](https://resend.com/).
+  - Implement feature flags if needed.
+  - Conduct a smoke test: create → schedule → publish → analyze → pay.
+  - Deploy to a staging environment for final validation.
+  - Prepare launch communications (e.g., blog post, email announcement).

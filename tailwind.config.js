@@ -16,19 +16,17 @@ module.exports = {
     },
     extend: {
       colors: {
+        // Design System Colors
+        primary: "#F59E0B", // Amber Gold
+        secondary: "#0EA5E9", // Sky Blue
+        accent: "#6366F1", // Indigo
+        background: "#F9FAFB", // Off-White
+        neutral: "#475569", // Slate Gray
+        
+        // shadcn/ui system colors (keeping for compatibility)
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
-        background: "hsl(var(--background))",
-        foreground: "hsl(var(--foreground))",
-        primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
-        },
-        secondary: {
-          DEFAULT: "hsl(var(--secondary))",
-          foreground: "hsl(var(--secondary-foreground))",
-        },
         destructive: {
           DEFAULT: "hsl(var(--destructive))",
           foreground: "hsl(var(--destructive-foreground))",
@@ -36,10 +34,6 @@ module.exports = {
         muted: {
           DEFAULT: "hsl(var(--muted))",
           foreground: "hsl(var(--muted-foreground))",
-        },
-        accent: {
-          DEFAULT: "hsl(var(--accent))",
-          foreground: "hsl(var(--accent-foreground))",
         },
         popover: {
           DEFAULT: "hsl(var(--popover))",
@@ -49,6 +43,19 @@ module.exports = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+      },
+      fontFamily: {
+        // Design System Typography
+        body: ["Inter", "sans-serif"],
+        heading: ["Poppins", "sans-serif"],
+      },
+      spacing: {
+        // Design System Spacing (8px base unit)
+        1: "8px",
+        2: "16px",
+        3: "24px",
+        4: "32px",
+      },
       },
       borderRadius: {
         lg: "var(--radius)",
