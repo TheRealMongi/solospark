@@ -16,20 +16,42 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   posts     Post[]
+  jobLogs   JobLog[]
 }
 
 model Post {
-  id            String   @id @default(uuid())
+  id            String    @id @default(uuid())
   userId        String
-  user          User     @relation(fields: [userId], references: [id])
+  user          User      @relation(fields: [userId], references: [id])
   content       String
-  platform      String
+  platform      String    // instagram, x, linkedin
   scheduledFor  DateTime
   publishedAt   DateTime?
-  status        String   @default("scheduled") // scheduled, published, failed
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  status        String    @default("scheduled") // scheduled, published, failed
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  jobLogs       JobLog[]
 
   @@index([userId])
+  @@index([status])
+  @@index([platform])
+}
+
+model JobLog {
+  id          String   @id @default(uuid())
+  jobId       String   // BullMQ job ID
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  postId      String?
+  post        Post?    @relation(fields: [postId], references: [id])
+  status      String   // completed, failed, processing
+  attempts    Int      @default(0)
+  error       String?
+  result      Json?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([userId])
+  @@index([jobId])
   @@index([status])
 }

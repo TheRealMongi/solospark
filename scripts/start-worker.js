@@ -1,43 +1,39 @@
 // This script starts the BullMQ worker for processing scheduled posts
 require('dotenv').config();
-const { Worker } = require('bullmq');
 
-console.log('Starting SoloSpark worker...');
-console.log(`Redis connection: ${process.env.UPSTASH_REDIS_HOST || 'localhost'}:${process.env.UPSTASH_REDIS_PORT || '6379'}`);
+// Use ts-node to register TypeScript support
+require('ts-node').register();
 
-// Initialize BullMQ worker
-const worker = new Worker('postQueue', async (job) => {
-  console.log(`Processing job ${job.id}`);
-  console.log('Job data:', job.data);
-  
-  const { userId, message, platform, scheduledTime } = job.data;
-  
-  // In a real implementation, this would call the appropriate social media API
-  console.log(`[${new Date().toISOString()}] Publishing post for user ${userId}`);
-  console.log(`Platform: ${platform}`);
-  console.log(`Message: ${message}`);
-  console.log(`Originally scheduled for: ${scheduledTime}`);
-  
-  // Simulate API call delay
-  await new Promise(resolve => setTimeout(resolve, 1000));
-  
-  console.log(`Post published successfully!`);
-  
-  return { success: true, publishedAt: new Date().toISOString() };
-}, {
-  connection: {
-    host: process.env.UPSTASH_REDIS_HOST || 'localhost',
-    port: parseInt(process.env.UPSTASH_REDIS_PORT || '6379'),
-    password: process.env.UPSTASH_REDIS_PASSWORD,
-  },
+// Import our worker module which contains the enhanced implementation
+const worker = require('../lib/worker').default;
+const pino = require('pino');
+
+const logger = pino({
+  level: process.env.NODE_ENV === 'production' ? 'info' : 'debug',
+  transport: process.env.NODE_ENV !== 'production' ? { target: 'pino-pretty' } : undefined,
 });
 
-worker.on('completed', (job) => {
-  console.log(`Job ${job.id} completed successfully`);
+logger.info({
+  redisHost: process.env.UPSTASH_REDIS_HOST || 'localhost',
+  redisPort: process.env.UPSTASH_REDIS_PORT || '6379',
+}, 'Starting SoloSpark worker...');
+
+// The worker is already configured in ../lib/worker.ts with proper error handling,
+// logging, and database integration
+
+// Add a process termination handler to gracefully shut down the worker
+process.on('SIGTERM', async () => {
+  logger.info('SIGTERM received, closing worker...');
+  await worker.close();
+  logger.info('Worker closed');
+  process.exit(0);
 });
 
-worker.on('failed', (job, err) => {
-  console.error(`Job ${job?.id} failed with error: ${err.message}`);
+process.on('SIGINT', async () => {
+  logger.info('SIGINT received, closing worker...');
+  await worker.close();
+  logger.info('Worker closed');
+  process.exit(0);
 });
 
-console.log('Worker started and waiting for jobs...');
+logger.info('Worker started and waiting for jobs...');

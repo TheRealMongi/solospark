@@ -1,0 +1,11 @@
+---
+trigger: always_on
+---
+
+Use Supabase for the PostgreSQL database
+
+project url = https://mnqmxvxmrhrhrrrfxrjr.supabase.co
+
+anon public key = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1ucW14dnhtcmhyaHJycmZ4cmpyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDc0ODI1NjQsImV4cCI6MjA2MzA1ODU2NH0.RylE1RQ4-4fZ2FmUSDC1Bcmym6yMJ_5TqoMjzJIWcFA
+
+service_role secret = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1ucW14dnhtcmhyaHJycmZ4cmpyIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc0NzQ4MjU2NCwiZXhwIjoyMDYzMDU4NTY0fQ.RzutZMVcP7YQ7z8ArfdBaoI6RKQU29v9NwUszPnyRS0
