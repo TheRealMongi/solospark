@@ -13,6 +13,8 @@ const buttonVariants = cva(
         primary: 'bg-primary text-white hover:bg-primary/90 hover:scale-105',
         // Secondary: Sky Blue (#0EA5E9)
         secondary: 'bg-secondary text-white hover:bg-secondary/80 hover:scale-105',
+        // Accent: Indigo (#6366F1)
+        accent: 'bg-accent text-white hover:bg-accent/80 hover:scale-105',
         // Ghost: Transparent with border
         ghost:
           'bg-transparent border border-neutral text-neutral hover:bg-accent/10 hover:scale-105',

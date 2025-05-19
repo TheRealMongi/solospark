@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Calendar, Clock, Sparkles, Image } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { trpc } from '../../lib/trpc-client';
 import { createPostSchema, CreatePostInput } from '../../schemas/postSchema';
 import PlatformToggles from './PlatformToggles';
@@ -145,8 +146,8 @@ const PostEditor: React.FC = () => {
   };
   
   return (
-    <div className="bg-white rounded-lg shadow-md p-6 max-w-4xl mx-auto">
-      <h2 className="text-2xl font-semibold text-slate-800 mb-6">Create Post</h2>
+    <div className="bg-background rounded-md shadow-card-md p-6 max-w-4xl mx-auto">
+      <h2 className="text-heading-2 font-heading font-semibold text-neutral mb-6">Create Post</h2>
       
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         {/* Platform selection */}
@@ -175,29 +176,31 @@ const PostEditor: React.FC = () => {
               id="content"
               rows={5}
               className={`
-                w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-amber-500 
-                focus:border-amber-500 resize-none
-                ${errors.content ? 'border-red-500' : 'border-slate-300'}
+                w-full px-4 py-2 border rounded-md font-body text-neutral
+                focus:ring-2 focus:ring-primary focus:border-primary resize-none transition-colors
+                ${errors.content ? 'border-destructive' : 'border-neutral/30'}
               `}
-              placeholder="What do you want to share?"
+              placeholder="Let's make this post sing."
               {...register('content')}
               disabled={isSubmitting}
             />
             
             {/* AI suggestions button */}
-            <button
+            <motion.button
               type="button"
               onClick={generateCaptions}
               disabled={isLoadingSuggestions || isSubmitting || !content}
               className={`
                 absolute right-3 bottom-3 p-2 rounded-md
                 ${isLoadingSuggestions || !content
-                  ? 'bg-slate-200 text-slate-400 cursor-not-allowed'
-                  : 'bg-amber-500 text-white hover:bg-amber-600'}
+                  ? 'bg-neutral/20 text-neutral/40 cursor-not-allowed'
+                  : 'bg-primary text-white hover:bg-primary-dark'}
               `}
+              whileHover={!isLoadingSuggestions && content ? { scale: 1.05 } : {}}
+              transition={{ duration: 0.2 }}
             >
               <Sparkles className="w-5 h-5" />
-            </button>
+            </motion.button>
           </div>
           {errors.content && (
             <p className="text-sm text-red-500">{errors.content.message}</p>
@@ -233,43 +236,52 @@ const PostEditor: React.FC = () => {
         
         {/* AI suggestions */}
         {aiSuggestions.length > 0 && (
-          <div className="bg-amber-50 p-4 rounded-md border border-amber-200">
-            <h3 className="text-sm font-medium text-amber-800 mb-2 flex items-center">
+          <motion.div 
+            className="bg-primary/5 p-4 rounded-md border border-primary/20"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            <h3 className="text-sm font-medium text-primary mb-2 flex items-center">
               <Sparkles className="w-4 h-4 mr-1" />
-              AI Caption Suggestions
+              ✨ AI Caption Suggestions
             </h3>
             <div className="space-y-2">
               {aiSuggestions.map((suggestion, index) => (
-                <div 
+                <motion.div 
                   key={index}
-                  className="bg-white p-3 rounded border border-amber-100 cursor-pointer hover:bg-amber-100 transition-colors"
+                  className="bg-background p-3 rounded-md border border-primary/10 cursor-pointer hover:bg-primary/5 transition-colors"
                   onClick={() => applySuggestion(suggestion)}
+                  whileHover={{ scale: 1.02 }}
+                  transition={{ duration: 0.2 }}
                 >
-                  <p className="text-sm text-slate-700">{suggestion}</p>
-                </div>
+                  <p className="text-sm font-body text-neutral">{suggestion}</p>
+                </motion.div>
               ))}
             </div>
-          </div>
+          </motion.div>
         )}
         
         {/* Platform-specific customization tabs */}
         {platforms.length > 0 && (
-          <div className="border rounded-md overflow-hidden">
-            <div className="flex border-b">
+          <div className="border border-neutral/20 rounded-md overflow-hidden">
+            <div className="flex border-b border-neutral/20">
               {platforms.map(platform => (
-                <button
+                <motion.button
                   key={platform}
                   type="button"
                   className={`
-                    flex-1 py-2 px-4 text-sm font-medium
+                    flex-1 py-2 px-4 text-sm font-medium transition-colors
                     ${selectedPlatformTab === platform
-                      ? 'bg-amber-50 text-amber-700 border-b-2 border-amber-500'
-                      : 'text-slate-600 hover:bg-slate-50'}
+                      ? 'bg-primary/5 text-primary border-b-2 border-primary'
+                      : 'text-neutral hover:bg-neutral/5'}
                   `}
                   onClick={() => setSelectedPlatformTab(platform)}
+                  whileHover={selectedPlatformTab !== platform ? { backgroundColor: 'rgba(71, 85, 105, 0.05)' } : {}}
+                  transition={{ duration: 0.2 }}
                 >
                   {platform.charAt(0).toUpperCase() + platform.slice(1)} Options
-                </button>
+                </motion.button>
               ))}
             </div>
             

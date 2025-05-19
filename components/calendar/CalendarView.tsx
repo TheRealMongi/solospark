@@ -6,7 +6,7 @@ import interactionPlugin from '@fullcalendar/interaction';
 import { motion } from 'framer-motion';
 import { trpc } from '../../lib/trpc-client';
 import { Post } from '@prisma/client';
-import { Edit, Trash2, X, Instagram, Twitter, Linkedin } from 'lucide-react';
+import { Edit, Trash2, X, Instagram, Twitter, Linkedin, Calendar } from 'lucide-react';
 
 interface CalendarViewProps {
   onEditPost?: (post: Post) => void;
@@ -174,13 +174,29 @@ const CalendarView: React.FC<CalendarViewProps> = ({ onEditPost }) => {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-6">
-      <h2 className="text-2xl font-semibold text-slate-800 mb-6">Content Calendar</h2>
+    <div className="bg-background rounded-md shadow-card-md p-6">
+      <h2 className="text-heading-2 font-heading font-semibold text-neutral mb-6">Content Calendar</h2>
 
       {isLoading ? (
         <div className="flex justify-center items-center h-64">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-amber-500"></div>
+          <motion.div 
+            className="animate-spin rounded-full h-10 w-10 border-b-2 border-primary"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3 }}
+          />
         </div>
+      ) : events.length === 0 ? (
+        <motion.div 
+          className="flex flex-col items-center justify-center h-64 text-center p-6 bg-background/50 rounded-md border border-neutral/10"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3 }}
+        >
+          <Calendar className="w-12 h-12 text-primary/50 mb-4" />
+          <h3 className="font-heading text-lg font-medium text-neutral mb-2">Nothing yet? Time to spark some chaos!</h3>
+          <p className="text-neutral/70 mb-4">Create your first post to see it on your calendar.</p>
+        </motion.div>
       ) : (
         <div className="calendar-container">
           <FullCalendar

@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import Card from '../ui/Card';
 import Badge from '../ui/Badge';
 import { Button } from '../ui/Button';
-import { ArrowUp, ArrowDown, Clock, Award, RefreshCw } from 'lucide-react';
+import { ArrowUp, ArrowDown, Clock, Award, RefreshCw, TrendingUp, Zap, Sparkles } from 'lucide-react';
 
 /**
  * Analytics Dashboard component based on the Design System Brief
@@ -45,104 +45,176 @@ const AnalyticsDashboard: React.FC = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3 }}
       >
-        <h1 className="text-3xl font-heading font-bold text-neutral mb-6">Analytics Dashboard</h1>
+        <h1 className="text-heading-2 font-heading font-bold text-neutral mb-2">Analytics Dashboard</h1>
+        <p className="text-neutral/70 mb-6">Quick insights to help you post smarter, not harder.</p>
 
         {/* Quick Wins Section */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-          <Card shadow="md" className="p-6 border-l-4 border-l-primary">
-            <div className="flex justify-between items-start mb-4">
-              <div>
-                <h3 className="text-lg font-heading font-medium mb-1">Your Top Performing Post</h3>
-                <Badge variant="primary" size="sm" className="mb-2">
-                  Instagram
-                </Badge>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.1 }}
+          >
+            <Card shadow="md" className="p-6 border-l-4 border-l-primary hover:shadow-card-lg transition-shadow duration-300">
+              <div className="flex justify-between items-start mb-4">
+                <div>
+                  <h3 className="text-heading-3 font-heading font-medium mb-1">Your Top Performing Post</h3>
+                  <Badge variant="primary" size="sm" className="mb-2" isAI={false}>
+                    Instagram
+                  </Badge>
+                </div>
+                <motion.div 
+                  className="flex items-center text-green-600"
+                  initial={{ scale: 0.9, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ duration: 0.3, delay: 0.4 }}
+                >
+                  <ArrowUp size={16} className="mr-1" />
+                  <span className="text-sm font-medium">
+                    {mockData.topPost.percentIncrease}% above average
+                  </span>
+                </motion.div>
               </div>
-              <div className="flex items-center text-green-600">
-                <ArrowUp size={16} className="mr-1" />
-                <span className="text-sm font-medium">
-                  {mockData.topPost.percentIncrease}% above average
+              <p className="text-neutral mb-4 font-body">"{mockData.topPost.content}"</p>
+              <div className="flex justify-between items-center">
+                <span className="text-sm text-neutral/70 font-body">
+                  {mockData.topPost.engagement} engagements
                 </span>
+                <Button variant="secondary" size="sm">
+                  <RefreshCw size={14} className="mr-2" />
+                  Recycle Post
+                </Button>
               </div>
-            </div>
-            <p className="text-neutral mb-4">"{mockData.topPost.content}"</p>
-            <div className="flex justify-between">
-              <span className="text-sm text-neutral/70">
-                {mockData.topPost.engagement} engagements
-              </span>
-              <Button variant="secondary" size="sm">
-                <RefreshCw size={14} className="mr-2" />
-                Recycle Post
-              </Button>
-            </div>
-          </Card>
+            </Card>
+          </motion.div>
 
-          <Card shadow="md" className="p-6 border-l-4 border-l-secondary">
-            <div className="flex justify-between items-start mb-4">
-              <div>
-                <h3 className="text-lg font-heading font-medium mb-1">Best Time to Post</h3>
-                <Badge variant="secondary" size="sm" className="mb-2">
-                  AI Recommendation
-                </Badge>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.2 }}
+          >
+            <Card shadow="md" className="p-6 border-l-4 border-l-secondary hover:shadow-card-lg transition-shadow duration-300">
+              <div className="flex justify-between items-start mb-4">
+                <div>
+                  <h3 className="text-heading-3 font-heading font-medium mb-1">Best Time to Post</h3>
+                  <Badge variant="secondary" size="sm" className="mb-2" isAI={true}>
+                    AI Recommendation
+                  </Badge>
+                </div>
+                <motion.div 
+                  className="flex items-center text-secondary"
+                  animate={{ rotate: [0, 15, 0, -15, 0] }}
+                  transition={{ duration: 1.5, repeat: Infinity, repeatDelay: 5 }}
+                >
+                  <Clock size={18} />
+                </motion.div>
               </div>
-              <div className="flex items-center text-neutral">
-                <Clock size={16} className="mr-1" />
+              <motion.div 
+                className="flex items-center mb-4"
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.4, delay: 0.5 }}
+              >
+                <span className="text-2xl font-heading font-bold text-secondary mr-2">
+                  {mockData.bestTime.day}, {mockData.bestTime.time}
+                </span>
+              </motion.div>
+              <div className="flex justify-between items-center">
+                <span className="text-sm text-neutral/70 font-body">
+                  +{mockData.bestTime.engagementIncrease}% engagement at this time
+                </span>
+                <Button variant="secondary" size="sm">
+                  <Zap size={14} className="mr-2" />
+                  Schedule Now
+                </Button>
               </div>
-            </div>
-            <div className="flex items-center mb-4">
-              <span className="text-2xl font-heading font-bold text-secondary mr-2">
-                {mockData.bestTime.day}, {mockData.bestTime.time}
-              </span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-sm text-neutral/70">
-                +{mockData.bestTime.engagementIncrease}% engagement at this time
-              </span>
-              <Button variant="secondary" size="sm">
-                Schedule Now
-              </Button>
-            </div>
-          </Card>
+            </Card>
+          </motion.div>
         </div>
 
         {/* Metrics Overview */}
-        <h2 className="text-xl font-heading font-medium mb-4">Metrics Overview</h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-          {Object.entries(mockData.metrics).map(([key, data]) => (
-            <Card key={key} shadow="sm" className="p-4">
-              <h4 className="text-sm font-body uppercase text-neutral/70 mb-1">
-                {key.charAt(0).toUpperCase() + key.slice(1)}
-              </h4>
-              <div className="flex items-baseline">
-                <span className="text-2xl font-heading font-bold text-neutral mr-2">
-                  {data.count.toLocaleString()}
-                </span>
-                <div
-                  className={`flex items-center text-sm ${data.change >= 0 ? 'text-green-600' : 'text-red-600'}`}
-                >
-                  {data.change >= 0 ? <ArrowUp size={12} /> : <ArrowDown size={12} />}
-                  <span className="ml-1">{Math.abs(data.change)}%</span>
-                </div>
-              </div>
-            </Card>
-          ))}
-        </div>
+        <motion.div 
+          className="mb-8"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+        >
+          <h2 className="text-heading-3 font-heading font-medium mb-4 flex items-center">
+            <TrendingUp className="mr-2 text-primary" size={20} />
+            Metrics Overview
+          </h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {Object.entries(mockData.metrics).map(([key, value], index) => (
+              <motion.div
+                key={key}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3, delay: 0.4 + (index * 0.1) }}
+              >
+                <Card shadow="sm" className="p-4 hover:shadow-card-md transition-shadow duration-300">
+                  <div className="flex justify-between items-start mb-2">
+                    <h4 className="text-sm font-medium text-neutral capitalize font-heading">{key}</h4>
+                    {value.change > 0 ? (
+                      <motion.div 
+                        className="flex items-center text-green-600 text-xs font-medium"
+                        initial={{ scale: 0.8 }}
+                        animate={{ scale: 1 }}
+                        transition={{ duration: 0.3, delay: 0.6 + (index * 0.1) }}
+                      >
+                        <ArrowUp size={12} className="mr-1" />
+                        {value.change}%
+                      </motion.div>
+                    ) : (
+                      <motion.div 
+                        className="flex items-center text-red-600 text-xs font-medium"
+                        initial={{ scale: 0.8 }}
+                        animate={{ scale: 1 }}
+                        transition={{ duration: 0.3, delay: 0.6 + (index * 0.1) }}
+                      >
+                        <ArrowDown size={12} className="mr-1" />
+                        {Math.abs(value.change)}%
+                      </motion.div>
+                    )}
+                  </div>
+                  <div className="text-2xl font-bold text-neutral font-heading">{value.count.toLocaleString()}</div>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
 
         {/* AI Insights */}
-        <h2 className="text-xl font-heading font-medium mb-4">AI Insights</h2>
-        <Card shadow="md" className="p-6">
-          <div className="flex items-center mb-4">
-            <Badge isAI variant="accent" className="mr-2" />
-            <h3 className="text-lg font-heading font-medium">What's Working For You</h3>
-          </div>
-          <ul className="space-y-3">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className="mb-8"
+        >
+          <h2 className="text-heading-3 font-heading font-medium mb-4 flex items-center">
+            <Sparkles className="mr-2 text-accent" size={20} />
+            AI Insights
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {mockData.insights.map((insight, index) => (
-              <li key={index} className="flex items-start">
-                <Award size={16} className="text-primary mr-2 mt-1 flex-shrink-0" />
-                <span className="text-neutral">{insight}</span>
-              </li>
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3, delay: 0.5 + (index * 0.1) }}
+              >
+                <Card 
+                  shadow="sm" 
+                  className="p-4 bg-accent/5 border-l-2 border-l-accent hover:shadow-card-md transition-shadow duration-300"
+                >
+                  <div className="flex items-start">
+                    <Badge variant="accent" size="sm" isAI={true} className="mr-3 flex-shrink-0" />
+                    <p className="text-sm font-body text-neutral">{insight}</p>
+                  </div>
+                </Card>
+              </motion.div>
             ))}
-          </ul>
-        </Card>
+          </div>
+        </motion.div>
       </motion.div>
     </div>
   );

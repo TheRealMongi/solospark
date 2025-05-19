@@ -1,16 +1,19 @@
 # SoloSpark Design System Implementation
 
-This document outlines the implementation of the SoloSpark Design System, providing a reference for developers to maintain consistency across the application.
+This document outlines the implementation of the SoloSpark Design System, providing a reference for developers to maintain consistency across the application. The design system reflects SoloSpark's mission to empower solopreneurs with a simple, fast, and joyful social media management experience.
 
 ## Color Palette
 
-| Role           | Color      | Hex       | Usage                                  |
-| -------------- | ---------- | --------- | -------------------------------------- |
-| **Primary**    | Amber Gold | `#F59E0B` | Main CTAs, highlights, branding        |
-| **Secondary**  | Sky Blue   | `#0EA5E9` | Secondary buttons, links, hover states |
-| **Accent**     | Indigo     | `#6366F1` | Badges, alerts, indicators             |
-| **Neutral**    | Slate Gray | `#475569` | Text, borders, subtle UI elements      |
-| **Background** | Off-White  | `#F9FAFB` | Page and card backgrounds              |
+| Role              | Color         | Hex       | Usage                                  |
+| ----------------- | ------------- | --------- | -------------------------------------- |
+| **Primary**       | Amber Gold    | `#F59E0B` | Main CTAs, highlights, branding        |
+| **Primary Dark**  | Darker Amber  | `#D97706` | Hover states for primary elements      |
+| **Secondary**     | Sky Blue      | `#0EA5E9` | Secondary buttons, links, hover states |
+| **Secondary Dark**| Darker Sky    | `#0284C7` | Hover states for secondary elements    |
+| **Accent**        | Indigo        | `#6366F1` | Badges, alerts, indicators             |
+| **Accent Dark**   | Darker Indigo | `#4F46E5` | Hover states for accent elements       |
+| **Neutral**       | Slate Gray    | `#475569` | Text, borders, subtle UI elements      |
+| **Background**    | Off-White     | `#F9FAFB` | Page and card backgrounds              |
 
 ## Typography
 
@@ -22,11 +25,21 @@ This document outlines the implementation of the SoloSpark Design System, provid
 ### Font Sizes
 
 - Base size: 16px (14px on mobile)
-- Heading scale:
-  - H1: 3xl (2xl on mobile)
-  - H2: 2xl (xl on mobile)
-  - H3: xl (lg on mobile)
-  - H4: lg (base on mobile)
+- Heading scale (with Tailwind classes):
+  - H1: `text-heading-1` (2.5rem, 1.875rem on mobile)
+  - H2: `text-heading-2` (2rem, 1.5rem on mobile)
+  - H3: `text-heading-3` (1.5rem, 1.125rem on mobile)
+
+### Line Heights
+
+- Body text: 1.5× (for readability)
+- Headings: 1.2× (for tighter display)
+
+### Font Weight Usage
+
+- Regular (400): Body text, paragraphs
+- Medium (500): Subheadings, emphasized text, button text
+- Bold (700): Main headings, important highlights
 
 ## Spacing
 
@@ -36,6 +49,83 @@ Based on 8px grid system:
 - `spacing.2`: 16px
 - `spacing.3`: 24px
 - `spacing.4`: 32px
+
+## Animations & Micro-interactions
+
+All animations use Framer Motion for consistent, smooth transitions.
+
+### Principles
+
+- **Duration**: Keep animations short (300ms or less) to maintain perceived performance
+- **Purpose**: Animations should provide feedback, not just decoration
+- **Accessibility**: Respect user preferences with `prefers-reduced-motion`
+
+### Common Animations
+
+```jsx
+// Fade in
+<motion.div
+  initial={{ opacity: 0 }}
+  animate={{ opacity: 1 }}
+  transition={{ duration: 0.3 }}
+/>
+
+// Scale on hover
+<motion.button
+  whileHover={{ scale: 1.05 }}
+  transition={{ duration: 0.2 }}
+/>
+
+// Staggered children
+<motion.div
+  initial={{ opacity: 0 }}
+  animate={{ opacity: 1 }}
+  transition={{ staggerChildren: 0.1 }}
+>
+  {items.map((item, index) => (
+    <motion.div
+      key={index}
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.3 }}
+    />
+  ))}
+</motion.div>
+```
+
+## Accessibility
+
+SoloSpark is designed to meet WCAG 2.1 AA standards.
+
+### Color Contrast
+
+- Text on backgrounds maintains at least 4.5:1 contrast ratio
+- UI controls and informational graphics maintain at least 3:1 contrast ratio
+
+### Keyboard Navigation
+
+- All interactive elements are focusable and have visible focus states
+- Tab order follows a logical sequence
+- No keyboard traps
+
+### Screen Readers
+
+- Semantic HTML elements are used appropriately
+- ARIA attributes supplement when needed
+- All images have appropriate alt text
+
+### Reduced Motion
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+```
 
 ## Components
 

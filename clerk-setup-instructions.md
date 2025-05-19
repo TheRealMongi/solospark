@@ -10,7 +10,8 @@ To fix the Clerk authentication error, you need to create a `.env` file with you
 
 ```
 # Clerk Authentication
-NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_publishable_key_here
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_publishable_key_herevercel login
+vercel
 CLERK_SECRET_KEY=your_secret_key_here
 CLERK_WEBHOOK_SECRET=your_webhook_secret_here
 
