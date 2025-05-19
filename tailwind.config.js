@@ -15,9 +15,6 @@ module.exports = {
       },
     },
     extend: {
-      backgroundColor: {
-        background: "#F9FAFB", // Off-White
-      },
       colors: {
         // Design System Colors
         primary: "#F59E0B", // Amber Gold
@@ -117,6 +114,9 @@ module.exports = {
         "accordion-up": "accordion-up 0.2s ease-out",
         "fade-in": "fade-in 0.3s ease-out",
         "scale-in": "scale-in 0.3s ease-out",
+      },
+      backgroundColor: {
+        background: "#F9FAFB", // Off-White
       },
     },
   },
