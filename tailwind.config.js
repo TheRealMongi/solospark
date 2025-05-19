@@ -116,7 +116,7 @@ module.exports = {
         "scale-in": "scale-in 0.3s ease-out",
       },
       backgroundColor: {
-        background: "#F9FAFB", // Off-White
+        'background': "#F9FAFB", // Off-White - Adding this to fix the bg-background utility
       },
     },
   },
