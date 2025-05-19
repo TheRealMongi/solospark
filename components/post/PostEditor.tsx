@@ -132,8 +132,14 @@ const PostEditor: React.FC = () => {
   // Calculate remaining characters for the current platform
   const getRemainingChars = (platform: string) => {
     const limit = PLATFORM_LIMITS[platform as keyof typeof PLATFORM_LIMITS] || 0;
-    const platformContent = 
-      watch(`platformSpecific.${platform}.content`) || content;
+    // Use a type-safe approach to get nested form values
+    let platformContent = content;
+    
+    // Access the platform-specific content if it exists
+    if (platform === 'instagram' || platform === 'x' || platform === 'linkedin') {
+      const formValues = watch();
+      platformContent = formValues?.platformSpecific?.[platform]?.content || content;
+    }
     
     return limit - (platformContent?.length || 0);
   };
@@ -380,7 +386,7 @@ const PostEditor: React.FC = () => {
                 render={({ field }) => (
                   <DatePicker
                     selected={field.value ? new Date(field.value) : new Date()}
-                    onChange={(date) => {
+                    onChange={(date: Date | null) => {
                       if (date) {
                         field.onChange(date.toISOString());
                       }
@@ -404,7 +410,7 @@ const PostEditor: React.FC = () => {
                 render={({ field }) => (
                   <DatePicker
                     selected={field.value ? new Date(field.value) : new Date()}
-                    onChange={(date) => {
+                    onChange={(date: Date | null) => {
                       if (date) {
                         field.onChange(date.toISOString());
                       }

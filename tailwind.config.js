@@ -15,6 +15,9 @@ module.exports = {
       },
     },
     extend: {
+      backgroundColor: {
+        background: "#F9FAFB", // Off-White
+      },
       colors: {
         // Design System Colors
         primary: "#F59E0B", // Amber Gold

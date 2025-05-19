@@ -1,3 +1,7 @@
+// @ts-check
+// eslint-disable-next-line
+/* eslint-env node */
+// This file is treated as an ES module
 import js from '@eslint/js';
 import globals from 'globals';
 import typescriptEslint from 'typescript-eslint';
